@@ -22,7 +22,18 @@
     res.send("all types of movies available")
   })
 
+  setTimeout(()=>{
+      console.log('this is timeout function it takes two second to execute');
+  },2000)
   const port = process.env.PORT || 3000;
+
+
+  const func = async()=>{
+    console.log("this is a arrow function ");
+  }
+module.exports = ()=>{
+  console.log("this is a use of async and await ")
+}
 
   app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
