@@ -1,10 +1,13 @@
 const mongoose = require('monngoose');
 
-const Schema = mongoose
+const connectdb = async()=>{
+    try{
+       await mongoose.connect('mongodb://localhost:27017/git');
+        console.log("MongoDb Connected SuccessFully! ");
+    }
+    catch(error){
+        res.message({status:false},error);
+    }
+}
 
-const UserSchema = new mongoose.Schema({
-    username:{
-        String,
-        required:true
-    },
-})
+module.exports = connectdb;
