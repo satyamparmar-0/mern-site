@@ -10,6 +10,8 @@ const UserSchema = new Schema({
     date:{type:Date,default:Date.now}
 })
 
+
+
 const Student = mongoose.model('Student',UserSchema)
 
 module.exports = Student;

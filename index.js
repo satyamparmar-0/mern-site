@@ -3,10 +3,11 @@
   const app = express();
   const Joi = require('joi')
   const logger = require('./logger')
+  const dotenv = require('dotenv');
 
   // console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
   // console.log(`app: ${app.get('env')}`);
-  
+  dotenv.config();
   app.use(express.json());
   app.use(logger);
   app.get('/', (req, res) => {
