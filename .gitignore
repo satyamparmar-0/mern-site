@@ -1,4 +1,3 @@
 node_modules/
+#environment 
 .env/
-
-D:\Project\First js\.env/
