@@ -1,4 +1,4 @@
-const Student = require("../Models/User");
+const Student = require("../Models/AddStudent");
 
 // here are all the logic of the app for the student
 
@@ -8,6 +8,7 @@ exports.AddStudent = async (req, res) => {
     const user = new Student({
       username: username,
       password: password,
+      
     });
 
     await user.save();
