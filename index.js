@@ -4,9 +4,6 @@
   const Joi = require('joi')
   const dotenv = require('dotenv');
   const connectdb = require('./Database/config')
-
-  // console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
-  // console.log(`app: ${app.get('env')}`);
   dotenv.config();
   app.use(express.json());
 
