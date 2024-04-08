@@ -1,31 +1,33 @@
-const mongoose = require('mongoose')
-const  Joi = require('joi')
+const mongoose = require('mongoose');
+const Joi = require('joi');
 
 const UserSchema = new mongoose.Schema({
-    email :{
-        required:true,
-        type:String,
-        unique:true
+    email: {
+        type: String,
+        required: true,
+        unique: true
     },
-    password:{
-        required:true,
-        type:String
+    password: {
+        type: String,
+        required: true
     },
-    role:{
-        type:String,
-        enum:['student','admin'],
-        default:'student'
+    role: {
+        type: String,
+        enum: ['student', 'admin'],
+        default: 'student'
     }
-})
+});
 
-const validate = (user)=>{
+const User = mongoose.model('User', UserSchema);
+
+const validateUser = (user) => {
     const schema = Joi.object({
-        email:Joi.string().required(),
-        password:Joi.string().required(),
+        email: Joi.string().required(),
+        password: Joi.string().required(),
         role: Joi.string().valid('student', 'admin').default('student')
-    })
-}
+    });
 
-const User = mongoose.model('User',UserSchema);   
+    return schema.validate(user);
+};
 
-module.exports = {User,validate};
+module.exports = { User, validateUser };

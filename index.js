@@ -2,39 +2,25 @@
   const express = require('express');
   const app = express();
   const Joi = require('joi')
-  const logger = require('./logger')
   const dotenv = require('dotenv');
+  const connectdb = require('./Database/config')
 
   // console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
   // console.log(`app: ${app.get('env')}`);
   dotenv.config();
   app.use(express.json());
-  app.use(logger);
+
+  const UserRoutes = require('./Routes/User');
+
+  app.use('/user',UserRoutes)
+
   app.get('/', (req, res) => {
     res.send('Hello, World!');
   });
 
-  //query parameter for sort the databases 
-  app.get('/name/:name',(req,res)=>{
-    res.send(req.query)
-  })
+  const port = 5000;
 
-  app.get('/api/genres',(req,res)=>{
-    res.send("all types of movies available")
-  })
-
-  setTimeout(()=>{
-      console.log('this is timeout function it takes two second to execute');
-  },2000)
-  const port = process.env.PORT || 3000;
-
-
-  const func = async()=>{
-    console.log("this is a arrow function ");
-  }
-module.exports = ()=>{
-  console.log("this is a use of async and await ")
-}
+connectdb();
 
   app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
