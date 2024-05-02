@@ -15,14 +15,14 @@ exports.register = async (req, res) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create a new user instance
+  
     const newUser = new User({
       email,
       password: hashedPassword,
       role
     });
 
-    // Save the new user to the database
+    
     await newUser.save();
 
     // Generate a token for the new user
@@ -44,22 +44,22 @@ exports.Login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Find the user by email
+    
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).send("Username not found or user not registered");
     }
 
-    // Compare the provided password with the hashed password stored in the database
+  
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
       return res.status(401).send("Incorrect password");
     }
 
-    // Generate a token for the authenticated user
+  
     const token = generateToken({ userId: user._id, role: user.role });
 
-    // Send response based on user role
+    
     if (user.role === 'admin') {
       res.send({ message: 'You are admin', token });
     } else {
